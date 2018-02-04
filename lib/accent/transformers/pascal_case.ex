@@ -14,7 +14,7 @@ defmodule Accent.Transformer.PascalCase do
   def call(""), do: ""
 
   def call(<<h::utf8, t::binary>>) do
-    String.Casing.downcase(<<h>>) <> do_pascalize(t)
+    String.Casing.downcase(<<h>>, [], :default) <> do_pascalize(t)
   end
 
   # private
@@ -24,7 +24,7 @@ defmodule Accent.Transformer.PascalCase do
   end
 
   defp do_pascalize(<<?_, h::utf8, t::binary>>) do
-    String.Casing.upcase(<<h>>) <> do_pascalize(t)
+    String.Casing.upcase(<<h>>, [], :default) <> do_pascalize(t)
   end
 
   defp do_pascalize(<<?_>>), do: <<>>
